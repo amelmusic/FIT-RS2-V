@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.421
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eProdaja.WebAPI", "eProdaja.WebAPI\eProdaja.WebAPI.csproj", "{B71B68DB-344F-435B-AAD1-2CDF08D6F944}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eProdaja.Model", "eProdaja.Model\eProdaja.Model.csproj", "{1F75F1B8-7AF1-47B8-8594-EDCADB4756D8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B71B68DB-344F-435B-AAD1-2CDF08D6F944}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B71B68DB-344F-435B-AAD1-2CDF08D6F944}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B71B68DB-344F-435B-AAD1-2CDF08D6F944}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B71B68DB-344F-435B-AAD1-2CDF08D6F944}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F75F1B8-7AF1-47B8-8594-EDCADB4756D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F75F1B8-7AF1-47B8-8594-EDCADB4756D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F75F1B8-7AF1-47B8-8594-EDCADB4756D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F75F1B8-7AF1-47B8-8594-EDCADB4756D8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0BDDE8C5-070B-4F4A-AFE5-00866A88A33B}
+	EndGlobalSection
+EndGlobal
