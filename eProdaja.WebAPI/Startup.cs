@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
+using eProdaja.WebAPI.Database;
+using eProdaja.WebAPI.Filters;
 using eProdaja.WebAPI.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -27,15 +31,19 @@ namespace eProdaja.WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc(x => x.Filters.Add<ErrorFilter>()).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddAutoMapper();
 
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
             });
 
-            services.AddSingleton<IProizvodService, ProizvodService>();
+            services.AddScoped<IProizvodService, ProizvodService>();
+            services.AddScoped<IKorisniciService, KorisniciService>();
 
+            var connection = @"Server=.\REPORTING;Database=eProdaja;Trusted_Connection=True;ConnectRetryCount=0";
+            services.AddDbContext<eProdajaContext>(options => options.UseSqlServer(connection));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
