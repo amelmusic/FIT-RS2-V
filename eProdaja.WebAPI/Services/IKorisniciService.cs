@@ -9,7 +9,7 @@ namespace eProdaja.WebAPI.Services
 {
     public interface IKorisniciService
     {
-        List<Model.Korisnici> Get();
+        List<Model.Korisnici> Get(KorisniciSearchRequest request);
 
         Model.Korisnici Insert(KorisniciInsertRequest request);
     }

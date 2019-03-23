@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using eProdaja.Model.Requests;
 using eProdaja.WebAPI.Database;
@@ -21,9 +22,9 @@ namespace eProdaja.WebAPI.Controllers
         }
 
         [HttpGet]
-        public List<Model.Korisnici> Get()
+        public List<Model.Korisnici> Get([FromQuery]KorisniciSearchRequest request)
         {
-            return _service.Get();
+            return _service.Get(request);
         }
 
         [HttpPost]

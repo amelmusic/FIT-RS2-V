@@ -7,6 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eProdaja.WebAPI", "eProdaja
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eProdaja.Model", "eProdaja.Model\eProdaja.Model.csproj", "{1F75F1B8-7AF1-47B8-8594-EDCADB4756D8}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{89F0B4A4-5D98-44B1-BFA2-C322C4BA0BBB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eProdaja.WinUI", "eProdaja.WinUI\eProdaja.WinUI.csproj", "{2C67EDCB-0E03-4DCD-85CD-226C604A9D21}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,9 +25,16 @@ Global
 		{1F75F1B8-7AF1-47B8-8594-EDCADB4756D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1F75F1B8-7AF1-47B8-8594-EDCADB4756D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1F75F1B8-7AF1-47B8-8594-EDCADB4756D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C67EDCB-0E03-4DCD-85CD-226C604A9D21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C67EDCB-0E03-4DCD-85CD-226C604A9D21}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C67EDCB-0E03-4DCD-85CD-226C604A9D21}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C67EDCB-0E03-4DCD-85CD-226C604A9D21}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2C67EDCB-0E03-4DCD-85CD-226C604A9D21} = {89F0B4A4-5D98-44B1-BFA2-C322C4BA0BBB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0BDDE8C5-070B-4F4A-AFE5-00866A88A33B}

@@ -7,6 +7,7 @@ using eProdaja.Model;
 using eProdaja.Model.Requests;
 using eProdaja.WebAPI.Database;
 using eProdaja.WebAPI.Exceptions;
+using Microsoft.EntityFrameworkCore;
 
 namespace eProdaja.WebAPI.Services
 {
@@ -20,10 +21,26 @@ namespace eProdaja.WebAPI.Services
             _mapper = mapper;
         }
 
-        public List<Model.Korisnici> Get()
+        public List<Model.Korisnici> Get(KorisniciSearchRequest request)
         {
-            _context.SaveChanges();
-            var list = _context.Korisnici.ToList();
+            var query = _context.Korisnici.AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(request?.Ime))
+            {
+                query = query.Where(x => x.Ime.StartsWith(request.Ime));
+            }
+
+            if (!string.IsNullOrWhiteSpace(request?.Prezime))
+            {
+                query = query.Where(x => x.Prezime.StartsWith(request.Prezime));
+            }
+
+            if(request?.IsUlogeLoadingEnabled == true)
+            {
+                query = query.Include(x => x.KorisniciUloge);
+            }
+
+            var list = query.ToList();
 
             return _mapper.Map<List<Model.Korisnici>>(list);
         }
