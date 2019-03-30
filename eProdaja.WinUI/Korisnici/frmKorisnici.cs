@@ -30,8 +30,16 @@ namespace eProdaja.WinUI.Korisnici
 
             var list = await _apiService.Get<List<Model.Korisnici>>(search);
             dgvKorisnici.AutoGenerateColumns = false;
-
+            
             dgvKorisnici.DataSource = list;
+        }
+
+        private void dgvKorisnici_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var korisnikId = int.Parse(dgvKorisnici.SelectedRows[0].Cells[0].Value.ToString());
+
+            frmKorisniciDetails frm = new frmKorisniciDetails(korisnikId);
+            frm.Show();
         }
     }
 }

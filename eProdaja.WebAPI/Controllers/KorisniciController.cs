@@ -32,5 +32,17 @@ namespace eProdaja.WebAPI.Controllers
         {
             return _service.Insert(request);
         }
+
+        [HttpPut("{id}")]
+        public Model.Korisnici Update(int id, [FromBody]KorisniciInsertRequest request)
+        {
+            return _service.Update(id, request);
+        }
+
+        [HttpGet("{id}")]
+        public Model.Korisnici GetById(int id)
+        {
+            return _service.GetById(id);
+        }
     }
 }

@@ -33,6 +33,7 @@
             this.dgvKorisnici = new System.Windows.Forms.DataGridView();
             this.txtPretraga = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.KorisnikID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.KorisnickoIme = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Status = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.groupBox1.SuspendLayout();
@@ -65,14 +66,17 @@
             this.dgvKorisnici.AllowUserToDeleteRows = false;
             this.dgvKorisnici.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvKorisnici.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.KorisnikID,
             this.KorisnickoIme,
             this.Status});
             this.dgvKorisnici.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvKorisnici.Location = new System.Drawing.Point(3, 16);
             this.dgvKorisnici.Name = "dgvKorisnici";
             this.dgvKorisnici.ReadOnly = true;
+            this.dgvKorisnici.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvKorisnici.Size = new System.Drawing.Size(758, 351);
             this.dgvKorisnici.TabIndex = 0;
+            this.dgvKorisnici.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvKorisnici_CellDoubleClick);
             // 
             // txtPretraga
             // 
@@ -89,6 +93,14 @@
             this.label1.Size = new System.Drawing.Size(47, 13);
             this.label1.TabIndex = 3;
             this.label1.Text = "Pretraga";
+            // 
+            // KorisnikID
+            // 
+            this.KorisnikID.DataPropertyName = "KorisnikID";
+            this.KorisnikID.HeaderText = "KorisnikID";
+            this.KorisnikID.Name = "KorisnikID";
+            this.KorisnikID.ReadOnly = true;
+            this.KorisnikID.Visible = false;
             // 
             // KorisnickoIme
             // 
@@ -129,6 +141,7 @@
         private System.Windows.Forms.DataGridView dgvKorisnici;
         private System.Windows.Forms.TextBox txtPretraga;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn KorisnikID;
         private System.Windows.Forms.DataGridViewTextBoxColumn KorisnickoIme;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Status;
     }

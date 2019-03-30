@@ -28,5 +28,34 @@ namespace eProdaja.WinUI
 
             return await url.GetJsonAsync<T>();
         }
+
+        public async Task<T> GetById<T>(object id)
+        {
+            var url = $"{Properties.Settings.Default.APIUrl}/{_route}/{id}";
+
+            return await url.GetJsonAsync<T>();
+        }
+
+        public async Task<T> Insert<T>(object request)
+        {
+            var url = $"{Properties.Settings.Default.APIUrl}/{_route}";
+
+
+            return await url.PostJsonAsync(request).ReceiveJson<T>();
+        }
+
+        public async Task<T> Update<T>(int id, object request)
+        {
+            try
+            {
+                var url = $"{Properties.Settings.Default.APIUrl}/{_route}/{id}";
+
+                return await url.PutJsonAsync(request).ReceiveJson<T>();
+            } catch(FlurlHttpException ex)
+            {
+                throw;
+            }
+            
+        }
     }
 }
