@@ -16,5 +16,10 @@ namespace eProdaja.WinUI.Proizvodi
         {
             InitializeComponent();
         }
+
+        private void cmbJedinicaMjere_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
