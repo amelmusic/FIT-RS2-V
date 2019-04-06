@@ -42,7 +42,7 @@ namespace eProdaja.WebAPI
             services.AddScoped<IProizvodService, ProizvodService>();
             services.AddScoped<IKorisniciService, KorisniciService>();
 
-            var connection = @"Server=.\REPORTING;Database=eProdaja;Trusted_Connection=True;ConnectRetryCount=0";
+            var connection = @"Server=.;Database=eProdaja;Trusted_Connection=True;ConnectRetryCount=0";
             services.AddDbContext<eProdajaContext>(options => options.UseSqlServer(connection));
         }
 

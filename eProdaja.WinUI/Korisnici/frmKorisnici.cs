@@ -41,5 +41,10 @@ namespace eProdaja.WinUI.Korisnici
             frmKorisniciDetails frm = new frmKorisniciDetails(korisnikId);
             frm.Show();
         }
+
+        private void dgvKorisnici_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

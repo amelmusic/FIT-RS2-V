@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using Flurl.Http;
 using eProdaja.Model;
 
@@ -40,8 +41,24 @@ namespace eProdaja.WinUI
         {
             var url = $"{Properties.Settings.Default.APIUrl}/{_route}";
 
+            try
+            {
+                return await url.PostJsonAsync(request).ReceiveJson<T>();
+            }
+            catch (FlurlHttpException ex)
+            {
+                var errors =await ex.GetResponseJsonAsync<Dictionary<string, string[]>>();
 
-            return await url.PostJsonAsync(request).ReceiveJson<T>();
+                var stringBuilder = new StringBuilder();
+                foreach (var error in errors)
+                {
+                    stringBuilder.AppendLine($"{error.Key}, ${string.Join(",", error.Value)}");
+                }
+
+                MessageBox.Show(stringBuilder.ToString(), "Greška", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return default(T);
+            }
+            
         }
 
         public async Task<T> Update<T>(int id, object request)
@@ -53,7 +70,16 @@ namespace eProdaja.WinUI
                 return await url.PutJsonAsync(request).ReceiveJson<T>();
             } catch(FlurlHttpException ex)
             {
-                throw;
+                var errors = await ex.GetResponseJsonAsync<Dictionary<string, string[]>>();
+
+                var stringBuilder = new StringBuilder();
+                foreach (var error in errors)
+                {
+                    stringBuilder.AppendLine($"{error.Key}, ${string.Join(",", error.Value)}");
+                }
+
+                MessageBox.Show(stringBuilder.ToString(), "Greška", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return default(T);
             }
             
         }

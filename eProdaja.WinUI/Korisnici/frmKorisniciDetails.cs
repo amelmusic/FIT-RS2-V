@@ -37,16 +37,21 @@ namespace eProdaja.WinUI.Korisnici
                     Telefon = txtTelefon.Text
                 };
 
+                Model.Korisnici entity = null;
                 if (!_id.HasValue)
                 {
-                    var entity = await _service.Insert<Model.Korisnici>(request);
+                    entity = await _service.Insert<Model.Korisnici>(request);
                 }
                 else
                 {
-                    await _service.Update<Model.Korisnici>(_id.Value, request);
+                    entity = await _service.Update<Model.Korisnici>(_id.Value, request);
                 }
-               
-                MessageBox.Show("Uspješno izvršeno");
+
+                if (entity != null)
+                {
+                    MessageBox.Show("Uspješno izvršeno");
+                }
+                
             }
             
         }
