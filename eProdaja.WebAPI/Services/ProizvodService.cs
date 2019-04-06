@@ -2,36 +2,32 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using eProdaja.Model;
+using eProdaja.Model.Requests;
+using eProdaja.WebAPI.Database;
 
 namespace eProdaja.WebAPI.Services
 {
-    public class ProizvodService : IProizvodService
+    public class ProizvodService : BaseCRUDService<Model.Proizvod, Database.Proizvodi, ProizvodiSearchRequest, ProizvodiInsertRequest>
     {
-		//demo for singletone IoC
-        string tmp = null;
-        public ProizvodService()
+        public ProizvodService(eProdajaContext context, IMapper mapper) 
+            : base(context, mapper)
         {
-            if (string.IsNullOrWhiteSpace(tmp))
+        }
+
+        public override List<Proizvod> Get(ProizvodiSearchRequest search = null)
+        {
+            var query = _context.Proizvodi.AsQueryable();
+
+            if (search?.VrstaId.HasValue == true)
             {
-                tmp = Guid.NewGuid().ToString();
+                query = query.Where(x => x.VrstaId == search.VrstaId);
             }
-        }
-        
-        public List<Proizvod> Get()
-        {
-            var list = new List<Proizvod>()
-            {
-                new Proizvod() { ProizvodID = 1, Name = "Monitor"}
-                ,new Proizvod() { ProizvodID = 2, Name = "Laptop"}
-            };
 
-            return list;
-        }
+            var list = query.OrderBy(x=>x.Naziv).ToList();
 
-        public Proizvod GetById(int id)
-        {
-            return new Proizvod() { ProizvodID = id, Name = "test" };
+            return _mapper.Map<List<Proizvod>>(list);
         }
     }
 }

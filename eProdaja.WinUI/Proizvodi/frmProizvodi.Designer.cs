@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cmbVrsteProizvoda = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.txtSifra = new System.Windows.Forms.TextBox();
@@ -42,20 +42,22 @@
             this.txtSlikaInput = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
-            this.proizvodiGrid = new System.Windows.Forms.DataGridView();
+            this.dgvProizvodi = new System.Windows.Forms.DataGridView();
             this.pictureBox = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.proizvodiGrid)).BeginInit();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvProizvodi)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.SuspendLayout();
             // 
-            // comboBox1
+            // cmbVrsteProizvoda
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(98, 32);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(206, 21);
-            this.comboBox1.TabIndex = 0;
+            this.cmbVrsteProizvoda.FormattingEnabled = true;
+            this.cmbVrsteProizvoda.Location = new System.Drawing.Point(98, 32);
+            this.cmbVrsteProizvoda.Margin = new System.Windows.Forms.Padding(2);
+            this.cmbVrsteProizvoda.Name = "cmbVrsteProizvoda";
+            this.cmbVrsteProizvoda.Size = new System.Drawing.Size(206, 21);
+            this.cmbVrsteProizvoda.TabIndex = 0;
+            this.cmbVrsteProizvoda.SelectedIndexChanged += new System.EventHandler(this.cmbVrsteProizvoda_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -80,7 +82,7 @@
             // txtSifra
             // 
             this.txtSifra.Location = new System.Drawing.Point(98, 57);
-            this.txtSifra.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtSifra.Margin = new System.Windows.Forms.Padding(2);
             this.txtSifra.Name = "txtSifra";
             this.txtSifra.Size = new System.Drawing.Size(206, 20);
             this.txtSifra.TabIndex = 3;
@@ -88,7 +90,7 @@
             // txtNaziv
             // 
             this.txtNaziv.Location = new System.Drawing.Point(98, 80);
-            this.txtNaziv.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtNaziv.Margin = new System.Windows.Forms.Padding(2);
             this.txtNaziv.Name = "txtNaziv";
             this.txtNaziv.Size = new System.Drawing.Size(206, 20);
             this.txtNaziv.TabIndex = 5;
@@ -146,6 +148,7 @@
             this.btnDodajSliku.TabIndex = 52;
             this.btnDodajSliku.Text = "Dodaj";
             this.btnDodajSliku.UseVisualStyleBackColor = true;
+            this.btnDodajSliku.Click += new System.EventHandler(this.btnDodajSliku_Click);
             // 
             // txtSlikaInput
             // 
@@ -173,22 +176,23 @@
             this.btnSave.Text = "Sačuvaj";
             this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // proizvodiGrid
+            // dgvProizvodi
             // 
-            this.proizvodiGrid.AllowUserToAddRows = false;
-            this.proizvodiGrid.AllowUserToDeleteRows = false;
-            this.proizvodiGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.proizvodiGrid.BackgroundColor = System.Drawing.SystemColors.Control;
-            this.proizvodiGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.proizvodiGrid.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.proizvodiGrid.Location = new System.Drawing.Point(0, 240);
-            this.proizvodiGrid.Name = "proizvodiGrid";
-            this.proizvodiGrid.ReadOnly = true;
-            this.proizvodiGrid.RowTemplate.Height = 100;
-            this.proizvodiGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.proizvodiGrid.Size = new System.Drawing.Size(600, 212);
-            this.proizvodiGrid.TabIndex = 56;
+            this.dgvProizvodi.AllowUserToAddRows = false;
+            this.dgvProizvodi.AllowUserToDeleteRows = false;
+            this.dgvProizvodi.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvProizvodi.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.dgvProizvodi.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvProizvodi.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.dgvProizvodi.Location = new System.Drawing.Point(0, 240);
+            this.dgvProizvodi.Name = "dgvProizvodi";
+            this.dgvProizvodi.ReadOnly = true;
+            this.dgvProizvodi.RowTemplate.Height = 100;
+            this.dgvProizvodi.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvProizvodi.Size = new System.Drawing.Size(600, 212);
+            this.dgvProizvodi.TabIndex = 56;
             // 
             // pictureBox
             // 
@@ -196,9 +200,13 @@
             this.pictureBox.Location = new System.Drawing.Point(468, 24);
             this.pictureBox.Name = "pictureBox";
             this.pictureBox.Size = new System.Drawing.Size(120, 120);
-            this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox.TabIndex = 57;
             this.pictureBox.TabStop = false;
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
             // 
             // frmProizvodi
             // 
@@ -206,7 +214,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(600, 452);
             this.Controls.Add(this.btnSave);
-            this.Controls.Add(this.proizvodiGrid);
+            this.Controls.Add(this.dgvProizvodi);
             this.Controls.Add(this.pictureBox);
             this.Controls.Add(this.btnDodajSliku);
             this.Controls.Add(this.txtSlikaInput);
@@ -220,11 +228,12 @@
             this.Controls.Add(this.txtSifra);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.comboBox1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Controls.Add(this.cmbVrsteProizvoda);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "frmProizvodi";
             this.Text = "Proizvodi";
-            ((System.ComponentModel.ISupportInitialize)(this.proizvodiGrid)).EndInit();
+            this.Load += new System.EventHandler(this.frmProizvodi_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvProizvodi)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -233,7 +242,7 @@
 
         #endregion
 
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cmbVrsteProizvoda;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtSifra;
@@ -247,7 +256,8 @@
         private System.Windows.Forms.TextBox txtSlikaInput;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button btnSave;
-        private System.Windows.Forms.DataGridView proizvodiGrid;
+        private System.Windows.Forms.DataGridView dgvProizvodi;
         private System.Windows.Forms.PictureBox pictureBox;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }
