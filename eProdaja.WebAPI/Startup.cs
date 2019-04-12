@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using eProdaja.Model.Requests;
 using eProdaja.WebAPI.Database;
 using eProdaja.WebAPI.Filters;
 using eProdaja.WebAPI.Services;
@@ -39,8 +40,14 @@ namespace eProdaja.WebAPI
                 c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
             });
 
-            services.AddScoped<IProizvodService, ProizvodService>();
+
             services.AddScoped<IKorisniciService, KorisniciService>();
+
+            services.AddScoped<IService<Model.VrsteProizvoda, object>, BaseService<Model.VrsteProizvoda, object, VrsteProizvoda>>();
+
+            services.AddScoped<IService<Model.JediniceMjere, object>, BaseService<Model.JediniceMjere, object, JediniceMjere>>();
+
+            services.AddScoped<ICRUDService<Model.Proizvod, ProizvodSearchRequest, ProizvodUpsertRequest, ProizvodUpsertRequest>, ProizvodService>();
 
             var connection = @"Server=.;Database=eProdaja;Trusted_Connection=True;ConnectRetryCount=0";
             services.AddDbContext<eProdajaContext>(options => options.UseSqlServer(connection));
