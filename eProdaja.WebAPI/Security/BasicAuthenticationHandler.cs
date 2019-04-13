@@ -43,7 +43,7 @@ namespace eProdaja.WebAPI.Security
                 var credentials = Encoding.UTF8.GetString(credentialBytes).Split(':');
                 var username = credentials[0];
                 var password = credentials[1];
-                //user = _userService. TODO Dodati auth ovdje
+                user = _userService.Authenticiraj(username, password);
             }
             catch
             {

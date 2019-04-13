@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace eProdaja.WebAPI.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class BaseController<T, TSearch> : ControllerBase

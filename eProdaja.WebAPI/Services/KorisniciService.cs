@@ -26,7 +26,18 @@ namespace eProdaja.WebAPI.Services
 
         public Model.Korisnici Authenticiraj(string username, string pass)
         {
-            
+            var user = _context.Korisnici.FirstOrDefault(x => x.KorisnickoIme == username);
+
+            if(user != null)
+            {
+                var hashedPass = GenerateHash(user.LozinkaSalt, pass);
+
+                if(hashedPass == user.LozinkaHash)
+                {
+                    return _mapper.Map<Model.Korisnici>(user);
+                }
+            }
+
             return null;
         }
 
