@@ -15,5 +15,7 @@ namespace eProdaja.WebAPI.Controllers
         public JediniceMjereController(IService<JediniceMjere, object> service) : base(service)
         {
         }
+
+        
     }
 }

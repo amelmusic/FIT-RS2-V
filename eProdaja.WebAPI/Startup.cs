@@ -6,7 +6,9 @@ using AutoMapper;
 using eProdaja.Model.Requests;
 using eProdaja.WebAPI.Database;
 using eProdaja.WebAPI.Filters;
+using eProdaja.WebAPI.Security;
 using eProdaja.WebAPI.Services;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -17,6 +19,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.Swagger;
+using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace eProdaja.WebAPI
 {
@@ -72,7 +75,10 @@ namespace eProdaja.WebAPI
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                
             });
+           
+
 
             app.UseHttpsRedirection();
             app.UseMvc();
