@@ -11,6 +11,9 @@ namespace eProdaja.WinUI
 {
     public class APIService
     {
+        public static string Username { get; set; }
+        public static string Password { get; set; }
+
         private readonly string _route;
         public APIService(string route)
         {
@@ -21,20 +24,31 @@ namespace eProdaja.WinUI
         {
             var url = $"{Properties.Settings.Default.APIUrl}/{_route}";
 
-            if(search != null)
+            try
             {
-                url += "?";
-                url += await search.ToQueryString();
-            }
+                if (search != null)
+                {
+                    url += "?";
+                    url += await search.ToQueryString();
+                }
 
-            return await url.GetJsonAsync<T>();
+                return await url.WithBasicAuth(Username, Password).GetJsonAsync<T>();
+            }
+            catch (FlurlHttpException ex)
+            {
+                if(ex.Call.HttpStatus == System.Net.HttpStatusCode.Unauthorized)
+                {
+                    MessageBox.Show("Niste authentificirani");
+                }
+                throw;
+            }
         }
 
         public async Task<T> GetById<T>(object id)
         {
             var url = $"{Properties.Settings.Default.APIUrl}/{_route}/{id}";
 
-            return await url.GetJsonAsync<T>();
+            return await url.WithBasicAuth(Username, Password).GetJsonAsync<T>();
         }
 
         public async Task<T> Insert<T>(object request)
@@ -43,7 +57,7 @@ namespace eProdaja.WinUI
 
             try
             {
-                return await url.PostJsonAsync(request).ReceiveJson<T>();
+                return await url.WithBasicAuth(Username, Password).PostJsonAsync(request).ReceiveJson<T>();
             }
             catch (FlurlHttpException ex)
             {
@@ -67,7 +81,7 @@ namespace eProdaja.WinUI
             {
                 var url = $"{Properties.Settings.Default.APIUrl}/{_route}/{id}";
 
-                return await url.PutJsonAsync(request).ReceiveJson<T>();
+                return await url.WithBasicAuth(Username, Password).PutJsonAsync(request).ReceiveJson<T>();
             } catch(FlurlHttpException ex)
             {
                 var errors = await ex.GetResponseJsonAsync<Dictionary<string, string[]>>();

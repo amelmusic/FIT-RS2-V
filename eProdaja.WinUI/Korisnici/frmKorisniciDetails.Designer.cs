@@ -47,12 +47,16 @@
             this.txtIme = new System.Windows.Forms.TextBox();
             this.btnSave = new System.Windows.Forms.Button();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.clbRole = new System.Windows.Forms.CheckedListBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label8);
+            this.groupBox1.Controls.Add(this.clbRole);
             this.groupBox1.Controls.Add(this.chkStatus);
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.txtPasswordPotvrda);
@@ -70,7 +74,7 @@
             this.groupBox1.Controls.Add(this.txtIme);
             this.groupBox1.Location = new System.Drawing.Point(13, 50);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(407, 388);
+            this.groupBox1.Size = new System.Drawing.Size(407, 501);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Detalji korisnika";
@@ -203,7 +207,7 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(345, 459);
+            this.btnSave.Location = new System.Drawing.Point(345, 557);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 1;
@@ -215,11 +219,28 @@
             // 
             this.errorProvider.ContainerControl = this;
             // 
+            // clbRole
+            // 
+            this.clbRole.FormattingEnabled = true;
+            this.clbRole.Location = new System.Drawing.Point(9, 388);
+            this.clbRole.Name = "clbRole";
+            this.clbRole.Size = new System.Drawing.Size(120, 94);
+            this.clbRole.TabIndex = 15;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(10, 369);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(35, 13);
+            this.label8.TabIndex = 16;
+            this.label8.Text = "Uloge";
+            // 
             // frmKorisniciDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(438, 499);
+            this.ClientSize = new System.Drawing.Size(438, 592);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.groupBox1);
             this.Name = "frmKorisniciDetails";
@@ -252,5 +273,7 @@
         private System.Windows.Forms.TextBox txtIme;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.ErrorProvider errorProvider;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.CheckedListBox clbRole;
     }
 }

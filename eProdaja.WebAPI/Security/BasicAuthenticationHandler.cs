@@ -43,7 +43,7 @@ namespace eProdaja.WebAPI.Security
                 var credentials = Encoding.UTF8.GetString(credentialBytes).Split(':');
                 var username = credentials[0];
                 var password = credentials[1];
-                //user = _userService. TODO Dodati auth ovdje
+                user = _userService.Authenticiraj(username, password);
             }
             catch
             {
@@ -58,6 +58,10 @@ namespace eProdaja.WebAPI.Security
                 new Claim(ClaimTypes.Name, user.Ime),
             };
             
+            foreach(var role in user.KorisniciUloge)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, role.Uloga.Naziv));
+            }
 
             var identity = new ClaimsIdentity(claims, Scheme.Name);
             var principal = new ClaimsPrincipal(identity);

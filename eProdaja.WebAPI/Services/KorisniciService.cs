@@ -26,7 +26,17 @@ namespace eProdaja.WebAPI.Services
 
         public Model.Korisnici Authenticiraj(string username, string pass)
         {
-            
+            var user = _context.Korisnici.Include("KorisniciUloge.Uloga").FirstOrDefault(x => x.KorisnickoIme == username);
+
+            if (user != null)
+            {
+                var newHash = GenerateHash(user.LozinkaSalt, pass);
+
+                if(newHash == user.LozinkaHash)
+                {
+                    return _mapper.Map<Model.Korisnici>(user);
+                }
+            }
             return null;
         }
 
@@ -96,6 +106,16 @@ namespace eProdaja.WebAPI.Services
             entity.LozinkaHash = GenerateHash(entity.LozinkaSalt, request.Password);
 
             _context.Korisnici.Add(entity);
+            _context.SaveChanges();
+
+            foreach(var uloga in request.Uloge)
+            {
+                Database.KorisniciUloge korisniciUloge = new Database.KorisniciUloge();
+                korisniciUloge.KorisnikId = entity.KorisnikId;
+                korisniciUloge.UlogaId = uloga;
+                korisniciUloge.DatumIzmjene = DateTime.Now;
+                _context.KorisniciUloge.Add(korisniciUloge);
+            }
             _context.SaveChanges();
 
             return _mapper.Map<Model.Korisnici>(entity);

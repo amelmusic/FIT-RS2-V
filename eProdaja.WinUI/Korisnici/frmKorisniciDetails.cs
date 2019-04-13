@@ -15,6 +15,8 @@ namespace eProdaja.WinUI.Korisnici
     public partial class frmKorisniciDetails : Form
     {
         APIService _service = new APIService("Korisnici");
+        APIService _ulogeService = new APIService("Uloge");
+
         private int? _id = null;
         public frmKorisniciDetails(int? id = null)
         {
@@ -26,6 +28,8 @@ namespace eProdaja.WinUI.Korisnici
         {
             if (ValidateChildren())
             {
+                var roleList = clbRole.CheckedItems.Cast<Model.Uloge>().Select(x=>x.UlogaId).ToList();
+
                 var request = new KorisniciInsertRequest
                 {
                     Email = txtEmail.Text,
@@ -34,7 +38,8 @@ namespace eProdaja.WinUI.Korisnici
                     Password = txtPassword.Text,
                     PasswordPotvrda = txtPasswordPotvrda.Text,
                     Prezime = txtPrezime.Text,
-                    Telefon = txtTelefon.Text
+                    Telefon = txtTelefon.Text,
+                    Uloge = roleList
                 };
 
                 Model.Korisnici entity = null;
@@ -58,6 +63,11 @@ namespace eProdaja.WinUI.Korisnici
 
         private async void frmKorisniciDetails_Load(object sender, EventArgs e)
         {
+            var ulogeList = await _ulogeService.Get<List<Model.Uloge>>(null);
+
+            clbRole.DataSource = ulogeList;
+            clbRole.DisplayMember = "Naziv";
+
             if (_id.HasValue)
             {
                 var entity = await _service.GetById<Model.Korisnici>(_id);

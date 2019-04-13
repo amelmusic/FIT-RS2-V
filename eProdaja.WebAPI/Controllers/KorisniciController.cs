@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 using eProdaja.Model.Requests;
 using eProdaja.WebAPI.Database;
 using eProdaja.WebAPI.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace eProdaja.WebAPI.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class KorisniciController : ControllerBase
@@ -27,12 +29,14 @@ namespace eProdaja.WebAPI.Controllers
             return _service.Get(request);
         }
 
+        [Authorize(Roles = "Administrator")]
         [HttpPost]
         public Model.Korisnici Insert(KorisniciInsertRequest request)
         {
             return _service.Insert(request);
         }
 
+        [Authorize(Roles = "Administrator")]
         [HttpPut("{id}")]
         public Model.Korisnici Update(int id, [FromBody]KorisniciInsertRequest request)
         {

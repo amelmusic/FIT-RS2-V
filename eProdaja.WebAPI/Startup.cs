@@ -23,6 +23,20 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace eProdaja.WebAPI
 {
+
+    public class BasicAuthDocumentFilter : IDocumentFilter
+    {
+        public void Apply(SwaggerDocument swaggerDoc, DocumentFilterContext context)
+        {
+            var securityRequirements = new Dictionary<string, IEnumerable<string>>()
+        {
+            { "basic", new string[] { } }  // in swagger you specify empty list unless using OAuth2 scopes
+        };
+
+            swaggerDoc.Security = new[] { securityRequirements };
+        }
+    }
+
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -41,14 +55,19 @@ namespace eProdaja.WebAPI
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
+                c.AddSecurityDefinition("basic", new BasicAuthScheme() { Type = "basic" });
+                c.DocumentFilter<BasicAuthDocumentFilter>();
             });
 
+            services.AddAuthentication("BasicAuthentication")
+               .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
 
             services.AddScoped<IKorisniciService, KorisniciService>();
 
             services.AddScoped<IService<Model.VrsteProizvoda, object>, BaseService<Model.VrsteProizvoda, object, VrsteProizvoda>>();
 
             services.AddScoped<IService<Model.JediniceMjere, object>, BaseService<Model.JediniceMjere, object, JediniceMjere>>();
+            services.AddScoped<IService<Model.Uloge, object>, BaseService<Model.Uloge, object, Uloge>>();
 
             services.AddScoped<ICRUDService<Model.Proizvod, ProizvodSearchRequest, ProizvodUpsertRequest, ProizvodUpsertRequest>, ProizvodService>();
 
@@ -77,9 +96,9 @@ namespace eProdaja.WebAPI
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
                 
             });
-           
 
 
+            app.UseAuthentication();
             app.UseHttpsRedirection();
             app.UseMvc();
         }
