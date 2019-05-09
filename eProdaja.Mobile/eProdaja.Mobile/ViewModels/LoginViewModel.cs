@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using eProdaja.Mobile.Views;
 using Xamarin.Forms;
 
 namespace eProdaja.Mobile.ViewModels
 {
     public class LoginViewModel : BaseViewModel
     {
+        private readonly APIService _service = new APIService("Korisnici");
+
         public LoginViewModel()
         {
             LoginCommand = new Command(async () => await Login());
@@ -32,6 +35,18 @@ namespace eProdaja.Mobile.ViewModels
         async Task Login()
         {
             IsBusy = true;
+            APIService.Username = Username;
+            APIService.Password = Password;
+
+            try
+            {
+                await _service.Get<dynamic>(null);
+                Application.Current.MainPage = new MainPage();
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
     }
 }

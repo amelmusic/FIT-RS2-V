@@ -3,29 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using eProdaja.Mobile.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace eProdaja.Mobile.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class LoginPage : ContentPage
+	public partial class ProizvodiPage : ContentPage
 	{
-		public LoginPage ()
+	    private ProizvodiViewModel model = null;
+		public ProizvodiPage ()
 		{
 			InitializeComponent ();
+		    BindingContext = model = new ProizvodiViewModel();
 		}
 
-	    private void Entry_OnTextChanged(object sender, TextChangedEventArgs e)
-	    {
-	        
-
-        }
-
-	    protected override void OnAppearing()
+	    protected async override void OnAppearing()
 	    {
 	        base.OnAppearing();
+            await model.Init();
 	    }
-	}
+    }
 }
