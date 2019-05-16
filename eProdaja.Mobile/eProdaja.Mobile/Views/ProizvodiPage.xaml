@@ -2,28 +2,40 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModels="clr-namespace:eProdaja.Mobile.ViewModels;assembly=eProdaja.Mobile"
+             xmlns:converters="clr-namespace:eProdaja.Mobile.Converters;assembly=eProdaja.Mobile"
              x:Class="eProdaja.Mobile.Views.ProizvodiPage">
     <ContentPage.BindingContext>
         <viewModels:ProizvodiViewModel></viewModels:ProizvodiViewModel>
     </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:ImageConverter x:Key="imgConv"></converters:ImageConverter>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout Padding="5">
             <Label Text="Proizvodi"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
-            <ListView ItemsSource="{Binding ProizvodiList}">
+            <Picker ItemsSource="{Binding VrsteProizvodaList}" SelectedItem="{Binding SelectedVrstaProizvoda}" ItemDisplayBinding="{Binding Naziv}"></Picker>
+            <ListView ItemsSource="{Binding ProizvodiList}" SelectedItem="{Binding SelectedProizvod}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <StackLayout Padding="10">
-                                <Label Text="{Binding Naziv}" 
-                                       LineBreakMode="NoWrap" 
-                                       Style="{DynamicResource ListItemTextStyle}" 
-                                       FontSize="16" />
-                                <Label Text="{Binding Sifra}" 
-                                       LineBreakMode="NoWrap"
-                                       Style="{DynamicResource ListItemDetailTextStyle}"
-                                       FontSize="13" />
+                            <StackLayout Padding="10" Orientation="Horizontal">
+                                <StackLayout>
+                                    <Image Source="{Binding SlikaThumb, Converter={StaticResource imgConv}}"></Image>
+                                </StackLayout>
+                                <StackLayout Orientation="Vertical">
+                                    <Label Text="{Binding Naziv}" 
+                                           LineBreakMode="NoWrap" 
+                                           Style="{DynamicResource ListItemTextStyle}" 
+                                           FontSize="16" />
+                                    <Label Text="{Binding Sifra}" 
+                                           LineBreakMode="NoWrap"
+                                           Style="{DynamicResource ListItemDetailTextStyle}"
+                                           FontSize="13" />
+                                </StackLayout>
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>
