@@ -4,24 +4,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using eProdaja.Mobile.ViewModels;
+using eProdaja.Model;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace eProdaja.Mobile.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class NarudzbaPage : ContentPage
+	public partial class ProizvodDetailPage : ContentPage
 	{
-		public NarudzbaPage ()
+        ProizvodDetailViewModel viewModel = null;
+		public ProizvodDetailPage (Proizvod proizvod)
 		{
 			InitializeComponent ();
+		    BindingContext = viewModel = new ProizvodDetailViewModel()
+		    {
+		        Proizvod = proizvod
+		    };
 		}
-
-	    protected override void OnAppearing()
-	    {
-	        base.OnAppearing();
-	        var ctx = BindingContext as NarudzbaViewModel;
-            ctx.Init();
-	    }
 	}
 }

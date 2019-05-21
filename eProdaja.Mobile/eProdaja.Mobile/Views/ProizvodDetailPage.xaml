@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="eProdaja.Mobile.Views.ProizvodDetailPage">
+    <ContentPage.Content>
+        <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Padding="20">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto">
+                    </RowDefinition>
+                    <RowDefinition Height="50"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <StackLayout Grid.Row="0" Grid.Column="0" Orientation="Vertical">
+                    <Label Text="{Binding Proizvod.Naziv}">
+                    </Label>
+                    <Label Text="{Binding Proizvod.Cijena, StringFormat='Cijena: {0:C}'}"></Label>
+                    <StackLayout Orientation="Horizontal">
+                        <Entry Keyboard="Numeric" Text="{Binding Kolicina}"></Entry>
+                        <Label Text="{Binding Kolicina}"></Label>
+                        <Button Text="+1" Command="{Binding KolicinaIncrementCommand}" ></Button>
+                    </StackLayout>
+                    
+                    
+                </StackLayout>
+                <StackLayout Grid.Row="1" Grid.Column="0" HorizontalOptions="End" Padding="10">
+                    <Image  Source="cart.png">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding KupiCommand}"></TapGestureRecognizer>
+                        </Image.GestureRecognizers>
+                    </Image>
+                </StackLayout>
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -9,13 +9,13 @@
     <ContentPage.Content>
         <StackLayout HorizontalOptions="FillAndExpand" Padding="10" VerticalOptions="CenterAndExpand">
             <Label  Text="Korisničko ime"></Label>
-            <Entry x:Name="KorisnickoIme" Text="{Binding Username}"></Entry>
+            <Entry Text="{Binding Username}"></Entry>
 
             <Label  Text="Password"></Label>
-            <Entry Text="{Binding Password}"></Entry>
+            <Entry Text="{Binding Password}" IsPassword="True"></Entry>
 
             <Button Command="{Binding LoginCommand}"  HorizontalOptions="FillAndExpand" Text="Login"></Button>
-            <Label IsVisible="{Binding IsBusy}" Text="Working..."></Label>
+            <Label IsVisible="{Binding IsBusy}" Text="..."></Label>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

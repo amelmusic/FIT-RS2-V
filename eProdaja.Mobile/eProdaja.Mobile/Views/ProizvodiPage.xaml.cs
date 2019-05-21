@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using eProdaja.Mobile.ViewModels;
+using eProdaja.Model;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -27,7 +28,8 @@ namespace eProdaja.Mobile.Views
 
 	    private async void ListView_OnItemSelected(object sender, SelectedItemChangedEventArgs e)
 	    {
-	        await Navigation.PushAsync(new NavigationPage(new NarudzbaPage()));
+	        var proizvod = e.SelectedItem as Proizvod;
+	        await Navigation.PushAsync(new ProizvodDetailPage(proizvod));
 	    }
 	}
 }
