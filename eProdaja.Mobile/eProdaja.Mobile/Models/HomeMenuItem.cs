@@ -8,7 +8,8 @@ namespace eProdaja.Mobile.Models
     {
         Browse,
         About,
-        Proizvodi
+        Proizvodi,
+        Narudzba
     }
     public class HomeMenuItem
     {

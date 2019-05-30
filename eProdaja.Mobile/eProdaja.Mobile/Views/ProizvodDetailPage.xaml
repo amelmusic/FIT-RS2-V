@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="eProdaja.Mobile.Views.ProizvodDetailPage">
+    <ContentPage.Content>
+        <Grid HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Padding="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="50"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <StackLayout Grid.Row="0" Grid.Column="0">
+                <Label Text="{Binding Proizvod.Naziv}"></Label>
+                <Label Text="{Binding Proizvod.Sifra}"></Label>
+                <Label Text="{Binding Proizvod.Cijena, StringFormat='Cijena: {0:C}'}"></Label>
+                <StackLayout Orientation="Horizontal">
+                    <Entry Text="{Binding Kolicina}" Keyboard="Numeric"></Entry>
+                    <Button Text="+1" Command="{Binding PovecajKolicinuCommand}"></Button>
+                </StackLayout>
+                
+            </StackLayout>
+            <StackLayout Grid.Row="1" Grid.Column="0">
+                <Image Source="cart.png">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding NaruciCommand}"></TapGestureRecognizer>
+                    </Image.GestureRecognizers>
+                </Image>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
