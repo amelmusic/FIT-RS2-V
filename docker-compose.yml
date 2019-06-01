@@ -1,0 +1,15 @@
+version: "3"
+services:
+    web:
+        build: .
+        ports:
+            - "8000:80"
+        depends_on:
+            - db
+    db:
+        image: "mcr.microsoft.com/mssql/server:2017-latest"
+        environment:
+            SA_PASSWORD: "qweasd"
+            ACCEPT_EULA: "Y"
+        ports:
+            - "1402:1433"

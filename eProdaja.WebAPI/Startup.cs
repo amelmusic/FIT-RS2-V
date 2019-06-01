@@ -72,7 +72,7 @@ namespace eProdaja.WebAPI
             services.AddScoped<ICRUDService<Model.Proizvod, ProizvodSearchRequest, ProizvodUpsertRequest, ProizvodUpsertRequest>, ProizvodService>();
 
             //var connection = @"Server=.;Database=eProdaja;Trusted_Connection=True;ConnectRetryCount=0";
-            var connection = @"Server=db;Database=eProdaja;username=sa;password=qweasd;ConnectRetryCount=0";
+            var connection = Configuration.GetConnectionString("eProdaja");//@"Server=db;Database=eProdaja;username=sa;password=qweasd;ConnectRetryCount=0";
             services.AddDbContext<eProdajaContext>(options => options.UseSqlServer(connection));
         }
 
